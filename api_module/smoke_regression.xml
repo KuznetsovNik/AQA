@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke and regress"  parallel="tests" thread-count="2">
+    <test name="\\api_module">
+        <groups>
+            <define name = "all">
+                <include name="smoke"/>
+                <include name="regression"/>
+            </define>
+            <run>
+                <include name = "all"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="gor_api.authorization"/>
+            <package name="gor_api.authorization.passport"/>
+            <package name="gor_api.authorization.phone"/>
+            <package name="gor_api.authorization_one_time"/>
+            <package name="gor_api.authorization_one_time.AuthInvalidDocument"/>
+            <package name="gor_api.authorization_one_time.AuthInvalidPhone"/>
+            <package name="gor_api.authorization_one_time.AuthValidDocument"/>
+            <package name="gor_api.authorization_one_time.AuthValidPhone"/>
+            <package name="gor_api.authorization_one_time.AuthWithoutValueInBody"/>
+            <package name="gor_api.user_registration"/>
+        </packages>
+    </test>
+</suite>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Smoke Regression UI" parallel="classes" thread-count="6">
+    <test name="\\gor-aqa-java">
+        <groups>
+            <run>
+<!--                <include name="smoke"/>-->
+<!--                <include name="regression"/>-->
+            </run>
+        </groups>
+        <packages>
+<!--            <package name="gor_ui.login_page.login"/>-->
+<!--            <package name="gor_ui.login_page.forget_password"/>-->
+<!--            <package name="gor_ui.login_page.registration"/>-->
+        </packages>
+    </test>
+</suite>

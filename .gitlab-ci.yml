@@ -1,0 +1,52 @@
+image: maven:3.8-openjdk-11
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+stages:
+  - build
+  - test
+  - report
+  - deploy
+
+Build:
+  stage: build
+  script:
+    - mvn compile
+
+Tests:
+  stage: test
+  script:
+    - mvn clean test
+  when: on_success
+  artifacts:
+    when: always
+    paths:
+      - test-report/*
+    expire_in: 1 hour
+
+Allure-report:
+  stage: report
+  script:
+    - mvn allure:report
+  when: always
+  artifacts:
+    when: always
+    paths:
+      - test-report/allure-report
+    expire_in: 1 day
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - mv ./test-report/allure-report/* public
+    - echo "The newest Allure report live here - https://aston.pages.astondevs.ru/repo-gor/gor-aqa-java/"
+  when: on_success
+  artifacts:
+    paths:
+      - public
+  rules:
+    - when: always
